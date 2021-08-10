@@ -26,16 +26,16 @@ to avoid clashing with the main window of the application.
 ////////////////////"""
 
 #Imports:
-import os															#Gives access to OS 
-from os import listdir												#Gathering directory information
+import os											#Gives access to OS 
+from os import listdir										#Gathering directory information
 from os.path import isfile, isdir, join								#File checking 
 
-import tkinter as tk												#Main TK library to control GUI
-from tkinter import ttk												#Notebook widget and ComboBoxes
-from tkinter.filedialog import askopenfilename, asksaveasfilename	#Command for opening/saving files
+import tkinter as tk										#Main TK library to control GUI
+from tkinter import ttk										#Notebook widget and ComboBoxes
+from tkinter.filedialog import askopenfilename, asksaveasfilename				#Command for opening/saving files
 
 import pathlib
-from pathlib import Path											#Used to gather the path and its parent
+from pathlib import Path									#Used to gather the path and its parent
 
 #Handlers/Functions:
 
@@ -99,29 +99,29 @@ def close(name):
 #Variables:
 searchDir = 'Modules'							#This is the main ModularToolkit folder which will hold all modules for scripts
 searchDirSlash = 'Modules/'						#Main folder name with a "/" character for indepth searching
-dirList = []									#List holding all "Modules" names
-dirList = getDirList(searchDir)					#Executing command to fill with Modules
-bindVal = 0										#This will be used as a place holder, to bind the correct comboBox object to its function (selected)
+dirList = []								#List holding all "Modules" names
+dirList = getDirList(searchDir)						#Executing command to fill with Modules
+bindVal = 0								#This will be used as a place holder, to bind the correct comboBox object to its function (selected)
 
 
 
 #Windows:
-root = tk.Tk()									#Main window, this is the parent widget
-root.title("Modular Toolkit - Alpha")			#The title you see on the TOP-LEFT when running
+root = tk.Tk()								#Main window, this is the parent widget
+root.title("Modular Toolkit - Alpha")					#The title you see on the TOP-LEFT when running
 root.geometry('350x150')						#Starting size of the applicaiton
-root.rowconfigure(0,minsize=100,weight=1)		#Minimum row configuration (Stretches Horizontally, stacks vertically)
-root.columnconfigure(0,minsize=100,weight=1)	#Minimum column configuration (Stretched vertically, stacks horizontally)
+root.rowconfigure(0,minsize=100,weight=1)				#Minimum row configuration (Stretches Horizontally, stacks vertically)
+root.columnconfigure(0,minsize=100,weight=1)				#Minimum column configuration (Stretched vertically, stacks horizontally)
 	
 	
 
 #TabControl:
-tabControl = ttk.Notebook(root)					#The parent tab controller. This will hold all the generated tabs
+tabControl = ttk.Notebook(root)						#The parent tab controller. This will hold all the generated tabs
 	
 	
 	
 #Frames/Tabs:
-tabList = []									#List holding all ttkFrame objects (aka:Tabs)
-tabList = getTabList(dirList)					#Executing command to fill with ttkFrame tabs
+tabList = []								#List holding all ttkFrame objects (aka:Tabs)
+tabList = getTabList(dirList)						#Executing command to fill with ttkFrame tabs
 
 for x in range(len(tabList)):
 	#This sets the tabs into the tabControl parent, with the names of the modules found in the dirList
@@ -130,8 +130,8 @@ for x in range(len(tabList)):
 
 	
 #ComboBoxes:
-comboOptions = []								#List which will contain all "options", which will be all .py files in a directory
-comboOptions = [[] for x in range(len(dirList))]#Will generate a List-of-Lists, since there will be multiple files in multiple directories
+comboOptions = []							#List which will contain all "options", which will be all .py files in a directory
+comboOptions = [[] for x in range(len(dirList))]			#Will generate a List-of-Lists, since there will be multiple files in multiple directories
 	
 for x in range(len(dirList)):
 	#This loop sets all the .py files filtered, into the respective list
@@ -139,8 +139,8 @@ for x in range(len(dirList)):
 
 	
 
-comboBoxList = []												#List which will contain ttkComboBox objects that will hold the options
-comboBoxList = getComboboxList(tabList,comboOptions,dirList)	#Executing command to fill with ttkComboBox objects
+comboBoxList = []							#List which will contain ttkComboBox objects that will hold the options
+comboBoxList = getComboboxList(tabList,comboOptions,dirList)		#Executing command to fill with ttkComboBox objects
 
 for x in comboBoxList:
 	#This loop binds all the comboBoxList objects to the command SELECTED() with their respective event and bindOption
@@ -157,8 +157,8 @@ for x in comboBoxList:
 
 #Buttons:
 
-btnRunList = []									#List holding all ttkButton objects
-btnRunList = getBtnRunList(tabList,dirList)		#Executing command to fill with ttkBtn objects
+btnRunList = []								#List holding all ttkButton objects
+btnRunList = getBtnRunList(tabList,dirList)				#Executing command to fill with ttkBtn objects
 
 
 
@@ -168,8 +168,8 @@ btnRunList = getBtnRunList(tabList,dirList)		#Executing command to fill with ttk
 ////////////////////"""
 #Layout
 
-tabControl.grid(sticky="nesw",row=0,column=0)	#Grid the main parent tab onto Root
+tabControl.grid(sticky="nesw",row=0,column=0)				#Grid the main parent tab onto Root
 gridComboBox(comboBoxList)						#Grid comboBoxList to their parents
 gridRunBtn(btnRunList)							#Grid btnRUnList to their parents
 
-startToolkit()									#Loop required to being displaying and running the applicaiton 
+startToolkit()								#Loop required to being displaying and running the applicaiton 
